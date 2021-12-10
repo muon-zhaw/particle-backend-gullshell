@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Functions and Variables Example</title>
+</head>
+
+<body>
+    <h4>Events</h4>
+    <!-- Events example -->
+    <p>Last Event: <span id="lastevent"></span></p>
+    <p>Trainingsstatus (Event): <span id="training-status"></span></p>
+    <p>Trainingskadenz [moves/min] (Event): <span id="training-cadence"></span></p>
+    <p>Trainingsbewegungen (Event): <span id="training-movements"></span></p>
+    <p>Durchschnittliche Trainingskadenz über Training [moves/min] (Event): <span id="training-cadence-avg"></span></p>
+    
+
+    <hr>
+    <h4>Variables</h4>
+    <!-- Read variables example -->
+    <!--<p>Counter (Variable): <span id="counter"></span></p>
+    <button onclick="getCounter()">Get counter</button>
+    <br>-->
+    <p>Hantelbewegungen in Training (Variable): <span id="movementsInTraining"></span></p>
+    <button onclick="getMovementsInTraining()">Get Anzahl Hantelbewegungen</button>
+    <br>
+
+    <hr>
+    <h4>Functions</h4>
+    <!-- Call functions example  -->
+    <p>Set Counter</p>
+    <input type="number" id="counterinput" value="0">
+    <button onclick="setCounter()">Set counter</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="gullshell.js"></script>
+</body>
+
+</html>
