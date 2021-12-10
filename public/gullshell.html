@@ -4,37 +4,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Functions and Variables Example</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>GullsHell Portal</title>
 </head>
 
 <body>
-    <h4>Events</h4>
-    <!-- Events example -->
-    <p>Last Event: <span id="lastevent"></span></p>
-    <p>Trainingsstatus (Event): <span id="training-status"></span></p>
-    <p>Trainingskadenz [moves/min] (Event): <span id="training-cadence"></span></p>
-    <p>Trainingsbewegungen (Event): <span id="training-movements"></span></p>
-    <p>Durchschnittliche Trainingskadenz über Training [moves/min] (Event): <span id="training-cadence-avg"></span></p>
-    
 
-    <hr>
-    <h4>Variables</h4>
-    <!-- Read variables example -->
-    <!--<p>Counter (Variable): <span id="counter"></span></p>
-    <button onclick="getCounter()">Get counter</button>
-    <br>-->
-    <p>Hantelbewegungen in Training (Variable): <span id="movementsInTraining"></span></p>
-    <button onclick="getMovementsInTraining()">Get Anzahl Hantelbewegungen</button>
-    <br>
+    <div class="container">
+        <div class="row mb-2">
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">Card Titel</h5>
+                    <p class="card-text">some text.</p>
+                    </div>
+                </div>    
+            </div>
+            <div class="col-6">
+                <div class="card text-center">
+                    <div class="card-body">
+                    <h1 class="card-title">GullsHell - Control Panel</h1>
+                    <p class="card-text">For a cleaner boat.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card text-center">
+                    <div class="card-body">                                                    
+                    <img src="seagull_cute.png" alt="Seagull" style="width:100%">
+                    <p class="card-text">For a cleaner boat.</p>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-12">
+                
+                Second row
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-12">                
+                <hr>
+                <h4>Events</h4>
+                <!-- Events example -->
+                <p>Last Event: <span id="lastevent"></span></p>
+                <p>Alarmsystem status (Event): <span id="alarmsystem-status"></span></p>
+                <p>Alarm active (Event): <span id="alarm-active"></span></p>                
+                
 
-    <hr>
-    <h4>Functions</h4>
-    <!-- Call functions example  -->
-    <p>Set Counter</p>
-    <input type="number" id="counterinput" value="0">
-    <button onclick="setCounter()">Set counter</button>
+                <hr>
+                <h4>Variables</h4>
+                <!-- Read variables example -->
+                <!--<p>Counter (Variable): <span id="counter"></span></p>
+                <button onclick="getCounter()">Get counter</button>
+                <br>-->
+                <p>Current value for timeout (Variable): <span id="alarm-timeout"></span></p>
+                <button onclick="getTimeout()" class="btn btn-outline-secondary">Get timeout</button>
+                <br>
+                <br>
+                <p>Alarmsystem status (Variable): <span id="alarmsystem-status-variable"></span></p>
+                <button onclick="getAlarmSystemStatus()" class="btn btn-outline-secondary">Get alarmsystem status</button>
+                <br>
+                <br>
+                <p>Alarm active? (Variable): <span id="alarm-status-variable"></span></p>
+                <button onclick="getAlarmActiveStatus()" class="btn btn-outline-secondary">Get alarm status</button>
+                <br>
+
+                <hr>
+                <h4>Functions</h4>
+                <!-- Call functions example  -->
+                <p>De-/Activate alarmsystem</p>                
+                <button onclick="setAlarmSystemState(1)" class="btn btn-outline-success">Activate alarmsystem</button>                    
+                <button onclick="setAlarmSystemState(0)" class="btn btn-outline-danger">Deactivate alarmsystem</button>                
+                <br>
+                <br>
+                <p>Set alarm timeout</p>
+                <input type="number" id="timeoutinput" value="0">
+                <button onclick="setAlarmTimeout()" class="btn btn-outline-secondary">Set alarm timeout</button>                
+            </div>
+        </div>
+    </div>    
+        
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <!-- Google Charts JavaScript -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <!-- Eigenes JavaScript -->
     <script src="gullshell.js"></script>
 </body>
 

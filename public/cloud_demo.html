@@ -11,21 +11,21 @@
     <h4>Events</h4>
     <!-- Events example -->
     <p>Last Event: <span id="lastevent"></span></p>
-    <p>Counter (Event): <span id="counterevent"></span></p>
+    <p>Alarmsystem status (Event): <span id="alarmsystemEvent"></span></p>
 
     <hr>
     <h4>Variables</h4>
     <!-- Read variables example -->
-    <p>Counter (Variable): <span id="counter"></span></p>
-    <button onclick="getCounter()">Get counter</button>
+    <p>Alarmsystem status (Variable): <span id="counter"></span></p>
+    <button onclick="getAlarmSystemStatus()">Get alarmsystem status</button>
     <br>
 
     <hr>
     <h4>Functions</h4>
     <!-- Call functions example  -->
-    <p>Set Counter</p>
-    <input type="number" id="counterinput" value="0">
-    <button onclick="setCounter()">Set counter</button>
+    <p>Set alarm timeout</p>
+    <input type="number" id="timeoutinput" value="0">
+    <button onclick="setAlarmTimeout()">Set alarm timeout</button>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="cloud_demo.js"></script>

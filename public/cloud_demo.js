@@ -17,27 +17,27 @@ initSSE();
 function updateVariables(data) {
     // update the html elements
     document.getElementById("lastevent").innerHTML = JSON.stringify(data);
-    if (data.eventName === "MyEvent") {
-        document.getElementById("counterevent").innerHTML = data.eventData;
+    if (data.eventName === "alarmsystemActiveChanged") {
+        document.getElementById("alarmsystemEvent").innerHTML = data.eventData;
     }
 }
 
-async function setCounter() {
+async function setAlarmTimeout() {
     // read the value from the input field
-    var counter = document.getElementById("counterinput").value;
+    var timeout = document.getElementById("timeoutinput").value;
 
     // call the function
-    var response = await axios.post(rootUrl + "/api/device/0/function/setCounter", { arg: counter });
+    var response = await axios.post(rootUrl + "/api/device/0/function/setTimeout", { arg: timeout });
 
     // Handle the response from the server
     alert("Response: " + response.data.result); // we could to something meaningful with the return value here ... 
 }
 
-async function getCounter() {
-    // request the variable "counter"
-    var response = await axios.get(rootUrl + "/api/device/0/variable/counter");
-    var counter = response.data.result;
+async function getAlarmSystemStatus() {
+    // request the variable "isActiveAlarmSystem"
+    var response = await axios.get(rootUrl + "/api/device/0/variable/isActiveAlarmSystem");
+    var isActiveAlarmSystem = response.data.result;
 
     // update the html element
-    document.getElementById("counter").innerHTML = counter;
+    document.getElementById("counter").innerHTML = isActiveAlarmSystem;
 }
