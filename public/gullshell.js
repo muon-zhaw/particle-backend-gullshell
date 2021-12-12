@@ -366,7 +366,21 @@ function parseTempStringToArray(temperaturesString1, temperaturesString2){
 //////////////////////////////////
 /////   Code für das Chart   /////
 //////////////////////////////////
+// Array, in dem alle empfangenen Lux-Werte gespeichert werden.
+var allMeasurements = [];
 
+// Maximaler Lux Level für die Berechnung des Prozentwerts und als maximaler Wert für das Chart.
+// -- TODO Aufgabe 1 -- 
+// Maximalwert anpassen 
+// 20'000 Lux entspricht klarem Himmel im Winter Mitteleuropa zur Mittagszeit
+// 6'000 Lux bedeckter Himmel, Sonnenhöhe 16° (mittags im Winter)
+// 3'000 Lux Bedeckter Wintertag
+// 1'400 Fußballstadion Kategorie 4
+// 750 Lux Dämmerung (Sonne knapp unter Horizont)
+// 500 lux Büro-/Zimmerbeleuchtung
+// 3 Lux Dämmerung (Sonne 6° unter Horizont
+//
+var maxLevel = 20000;
 // Line Chart Dokumentation: https://developers.google.com/chart/interactive/docs/gallery/linechart
 
 // Chart und Variablen 
