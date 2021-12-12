@@ -1,4 +1,5 @@
 var rootUrl = window.location.origin; // get the root URL, e.g. https://example.herokuapp.com or http://localhost:3001
+const NUMBER_OF_COLUMNS = 32;
 
 // initialise server-sent events
 function initSSE() {
@@ -14,15 +15,110 @@ function initSSE() {
 }
 initSSE();
 
+function initialize(){
+    getTimeout();
+    getSignificantTemperatureDifference();
+    getAlarmSystemStatus();
+    getAlarmActiveStatus();    
+    getSensitivity();
+    //createHeatMap(NUMBER_OF_COLUMNS, getRandomOrEmptyTemperatureArray(true));
+}
+//initialize()
+
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function createHeatMap(nrOfColumns, arr){
+    var table = document.getElementById("my-heatmap");
+    
+    arr.forEach(function( element, index){        
+        var rowIndex = Math.trunc(index / nrOfColumns);
+        var colIndex = index % nrOfColumns;
+        var row;
+        var cell;
+        // check if row exists already        
+        if(table.rows.length-1 >= rowIndex){
+            row = table.rows[rowIndex];
+        } else {       
+            row = table.insertRow(rowIndex);            
+        }
+        // check if cell exists already
+        if(row.cells.length-1 >= colIndex){
+            cell = row.cells[colIndex];
+        } else {
+            cell = row.insertCell(colIndex);
+        }        
+        //cell.innerHTML = element;
+        cell.classList.value = ''
+        cell.classList.add(getHeatLevelFromChar(element));
+    });
+    
+}
+
+function getHeatLevelFromChar(c){
+    var className = "heatL01";
+    switch (c) {
+        case '&':
+            className = "heatL10";
+            break;
+        case 'X':
+            className = "heatL09";
+            break;        
+        case '#':
+            className = "heatL08";
+            break;
+        case '%':
+            className = "heatL07";
+            break;
+        case 'x':
+            className = "heatL06";
+            break;
+        case '+':
+            className = "heatL05";
+            break;
+        case '*':
+            className = "heatL04";
+            break;
+        case '-':
+            className = "heatL03";
+            break;
+        case '.':
+            className = "heatL02";
+            break;                                                                        
+        default:
+            className = "none";
+          break;
+      }
+    return className;
+}
+
+function getRandomOrEmptyTemperatureArray(empty){
+    var temperatures = [];
+    temperatures.length = 768;
+    if(empty == true){
+        for (var i = 0; i < temperatures.length; i++) {
+            temperatures[i] ='!';        
+        }
+    } else{
+        for (var i = 0; i < temperatures.length; i++) {
+            temperatures[i] =getRandomArbitrary(-20,400);        
+        }
+    }    
+    return temperatures
+}
+
 function updateVariables(data) {
     // update the html elements
     document.getElementById("lastevent").innerHTML = JSON.stringify(data);
         
     if (data.eventName === "AlarmsystemActiveChanged") {
         document.getElementById("alarmsystem-status").innerHTML = data.eventData;
+
     }
     if (data.eventName === "AlarmStatusChanged") {
         document.getElementById("alarm-active").innerHTML = data.eventData;
+        getAlarmActiveStatus(data);
     }
     
     //if (data.eventName === "training-stop") {
@@ -103,6 +199,18 @@ function updateVariables(data) {
     }
 }
 
+async function setAlarmSystemState(status) {      
+    // call the function
+    if(status === 1){
+        var response = await axios.post(rootUrl + "/api/device/0/function/setAlarsystemOn", { arg: "null" });
+    } else{
+        var response = await axios.post(rootUrl + "/api/device/0/function/setAlarsystemOff", { arg: "null" });
+    }
+    getAlarmSystemStatus();
+    // Handle the response from the server
+    //alert("Response: " + response.data.result); // we could to something meaningful with the return value here ... 
+}
+
 async function setAlarmTimeout() {
     // read the value from the input field
     var timeout = document.getElementById("timeoutinput").value;
@@ -115,14 +223,56 @@ async function setAlarmTimeout() {
     //alert("Response: " + response.data.result); // we could to something meaningful with the return value here ... 
 }
 
-async function setAlarmSystemState(status) {      
+async function setSignificantTemperatureDifference() {
+    // read the value from the input field
+    var tempDifference = document.getElementById("significant-temp-diff-input").value;
+
+    // call the function
+    var response = await axios.post(rootUrl + "/api/device/0/function/setSignificantTemperatureDifference", { arg: tempDifference });
+
+    getSignificantTemperatureDifference();
+    // Handle the response from the server    
+    //alert("Response: " + response.data.result); // we could to something meaningful with the return value here ... 
+}
+
+
+async function setSensitivity() {
+    // read the value from the input field
+    var sensitivity = document.getElementById("sensitivityRange").value;
+
+    // call the function
+    var response = await axios.post(rootUrl + "/api/device/0/function/setSensitivity", { arg: sensitivity });
+
+    updateSensitivityValueTag(sensitivity);    
+}
+
+function updateSensitivityValueTag(sensitivity){    
+    // update the html element
+     document.getElementById("sensitivity-value").innerHTML = sensitivity;
+}
+
+function updateSensitivityValueSlider(sensitivity){    
+    // update the html element
+     document.getElementById("sensitivityRange").value = sensitivity;
+}
+async function setFlashLightState(status) {      
     // call the function
     if(status === 1){
-        var response = await axios.post(rootUrl + "/api/device/0/function/setAlarsystemOn", { arg: "null" });
+        var response = await axios.post(rootUrl + "/api/device/0/function/setFlashLightOn", { arg: "null" });
     } else{
-        var response = await axios.post(rootUrl + "/api/device/0/function/setAlarsystemOff", { arg: "null" });
+        var response = await axios.post(rootUrl + "/api/device/0/function/setFlashLightOff", { arg: "null" });
+    }   
+    // Handle the response from the server
+    //alert("Response: " + response.data.result); // we could to something meaningful with the return value here ... 
+}
+
+async function setSoundState(status) {      
+    // call the function
+    if(status === 1){
+        var response = await axios.post(rootUrl + "/api/device/0/function/setSoundOn", { arg: "null" });
+    } else{
+        var response = await axios.post(rootUrl + "/api/device/0/function/setSoundOff", { arg: "null" });
     }
-    getAlarmSystemStatus();
     // Handle the response from the server
     //alert("Response: " + response.data.result); // we could to something meaningful with the return value here ... 
 }
@@ -136,6 +286,26 @@ async function getTimeout() {
     document.getElementById("alarm-timeout").innerHTML = timeout;
 }
 
+async function getSignificantTemperatureDifference() {
+    // request the variable "significantTemperatureDifference"
+    var response = await axios.get(rootUrl + "/api/device/0/variable/significantTemperatureDifference");
+    var timeout = response.data.result;
+
+    // update the html element
+    document.getElementById("significant-temp-diff").innerHTML = timeout + " °C";
+}
+
+async function getSensitivity() {
+    // request the variable "sensitivity"
+    var response = await axios.get(rootUrl + "/api/device/0/variable/sensitivity");
+    var sensitivity = response.data.result;
+
+    // update the html element
+    updateSensitivityValueTag(sensitivity);
+    updateSensitivityValueSlider(sensitivity);
+}
+
+
 async function getAlarmSystemStatus() {
     // request the variable "isActiveAlarmSystem"
     var response = await axios.get(rootUrl + "/api/device/0/variable/isActiveAlarmSystem");
@@ -143,15 +313,52 @@ async function getAlarmSystemStatus() {
 
     // update the html element
     document.getElementById("alarmsystem-status-variable").innerHTML = isActiveAlarmSystem;
+    
+    var att = document.createAttribute("checked");
+    if(isActiveAlarmSystem){
+        document.getElementById("set-alarmsystem-active").setAttributeNode(att);
+    } else{
+        document.getElementById("set-alarmsystem-inactive").setAttributeNode(att);
+    }     
 }
 
-async function getAlarmActiveStatus() {
+async function getAlarmActiveStatus(data) {
     // request the variable "isAlarmActive"
     var response = await axios.get(rootUrl + "/api/device/0/variable/isAlarmActive");
     var isAlarmActive = response.data.result;
 
     // update the html element
-    document.getElementById("alarm-status-variable").innerHTML = isAlarmActive;
+    document.getElementById("alarm-status-variable").innerHTML = isAlarmActive;    
+
+    var alarmtext = document.getElementById("alarm-text");
+    // show alarm
+    if(isAlarmActive == true){
+        alarmtext.innerHTML = "alarm active"
+        alarmtext.classList.add("blinking");
+        
+    } else {
+        alarmtext.innerHTML = "no alarm"
+        alarmtext.classList.remove("blinking");        
+        //createHeatMap(NUMBER_OF_COLUMNS, getRandomOrEmptyTemperatureArray(true));
+    }
+
+    var firstpart = await axios.get(rootUrl + "/api/device/0/variable/temperatureCharactersString1");        
+    var secondpart = await axios.get(rootUrl + "/api/device/0/variable/temperatureCharactersString2");  
+    temperatures = parseTempStringToArray(firstpart.data.result, secondpart.data.result);        
+    createHeatMap(NUMBER_OF_COLUMNS, temperatures);
+}
+
+function parseTempStringToArray(temperaturesString1, temperaturesString2){
+    //JSON.parse(temperaturesString)
+    var temperatures = [];
+    temperatures.length = temperaturesString1.length + temperaturesString2.length;
+    for (var i = 0; i < temperaturesString1.length; i++) {
+        temperatures[i] = temperaturesString1.charAt(i);
+    }
+    for (var i = 0; i < temperaturesString2.length; i++) {
+        temperatures[i+temperaturesString1.length] = temperaturesString2.charAt(i);
+    }
+    return temperatures;
 }
 
 

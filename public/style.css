@@ -1,0 +1,28 @@
+.blinking{
+    animation:blinkingText 1.2s infinite;
+}
+@keyframes blinkingText{
+    0%{     color: #000;    }
+    49%{    color: #000; }
+    60%{    color: transparent; }
+    99%{    color:transparent;  }
+    100%{   color: #000;    }
+}
+
+.heatmap { 
+    border-spacing: 0; border-collapse: collapse; 
+    padding: .5em;
+    border: 1px solid; width: 4em; height: 4em; 
+}
+.heatmap .none{ background: rgb(195, 195, 195);}
+.heatmap .heatL01{ background: rgb(255, 255, 255);}
+.heatmap .heatL02{ background: rgb(255, 225, 225);}
+.heatmap .heatL03{ background: rgb(255, 200 , 200);}
+.heatmap .heatL04{ background: rgb(255, 175 , 175);}
+.heatmap .heatL05{ background: rgb(255, 150 , 150);}
+.heatmap .heatL06{ background: rgb(255, 125 , 125);}
+.heatmap .heatL07{ background: rgb(255, 100 , 100);}
+.heatmap .heatL08{ background: rgb(255, 75 , 75);}
+.heatmap .heatL09{ background: rgb(255, 50 , 50);}
+.heatmap .heatL10{ background: rgb(255, 0 , 0);}
+

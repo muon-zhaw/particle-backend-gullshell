@@ -26,7 +26,7 @@ function handleAlarmsystemActiveChanged(event) {
         // TODO: do something meaningful with the data
 
         // Log the event in the database
-        // logger.logOne("MyDB", "MyEvent", data);
+        //logger.logOne("MyDB", "MyEvent", data);
 
         // send data to all connected clients
         exports.sendEvent(data);
@@ -49,9 +49,11 @@ function handleAlarmsStatusChanged(event) {
 
     try {        
         // you can add more properties to your data object
-        data.myMessage = "Alarm was set to true"; // may held over the array of alarms over time?
-
-        // TODO: do something meaningful with the data
+        data.myMessage = "Alarm was set to true"; 
+        
+        //data.temperatures = JSON.stringify(getTemperatureArray(false));    
+        //data.temperatures = JSON.stringify(temp);
+        // may held over the array of alarms over time?
 
         // Log the event in the database
         logger.logOne("MyDB", "AlarmStatusChanged", data);
