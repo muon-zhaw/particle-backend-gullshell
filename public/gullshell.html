@@ -53,8 +53,8 @@
                     <input type="radio" class="btn-check" name="btnradio_alarmsystem_1" id="set-alarmsystem-active" autocomplete="off" onclick="setAlarmSystemState(1)">
                     <label class="btn btn btn-outline-success btn-lg" for="set-alarmsystem-active">Activate alarmsystem</label>
                   
-                    <input type="radio" class="btn-check" name="btnradio_alarmsystem_1" id="set-alarmsystem-inactiv" autocomplete="off" onclick="setAlarmSystemState(0)" checked>
-                    <label class="btn btn-outline-danger btn-lg" for="set-alarmsystem-inactiv">Deactivate alarmsystem</label>
+                    <input type="radio" class="btn-check" name="btnradio_alarmsystem_1" id="set-alarmsystem-inactive" autocomplete="off" onclick="setAlarmSystemState(0)" checked>
+                    <label class="btn btn-outline-danger btn-lg" for="set-alarmsystem-inactive">Deactivate alarmsystem</label>
                 </div>         
             </div>
         </div>
@@ -85,7 +85,7 @@
                     <div class="col">
                         <div class="d-grid gap-2"><button onclick="getTimeout()" class="btn btn-outline-secondary">Get timeout</button></div>                        
                     </div>
-                    <div class="col-1">                      
+                    <div class="col-1 text-center">                      
                         <h3><span class="badge bg-secondary" id="alarm-timeout">-</span></h3>
                     </div>
                     <div class="col">  
@@ -96,33 +96,33 @@
                     <div class="col">
                         <div class="d-grid gap-2"><button onclick="getSignificantTemperatureDifference()" class="btn btn-outline-secondary">Get significant temperature difference</button></div>                        
                     </div>
-                    <div class="col-1">                      
+                    <div class="col-1 text-center">                      
                         <h3><span class="badge bg-secondary" id="significant-temp-diff">-</span></h3>
                     </div>
                     <div class="col">  
-                        <p>Current value for significant temperature difference</p>                                            
+                        <h6>Current value for significant temperature difference</h6>                                            
                     </div>
                 </div>                  
                 <div class="row g-3">                    
                     <div class="col">
                         <div class="d-grid gap-2"><button onclick="getAlarmSystemStatus()" class="btn btn-outline-secondary">Get alarmsystem status</button></div>
                     </div>
-                    <div class="col-1">                      
+                    <div class="col-1 text-center">                      
                         <h3><span class="badge bg-secondary" id="alarmsystem-status-variable">-</span></h3>
                     </div>
                     <div class="col">                      
-                        <p>Alarmsystem status</p>
+                        <h6>Alarmsystem status</h6>
                     </div>
                 </div>  
                 <div class="row g-3">                    
                     <div class="col">
                         <div class="d-grid gap-2"><button onclick="getAlarmActiveStatus()" class="btn btn-outline-secondary">Get alarm status</button></div>
                     </div>
-                    <div class="col-1">                      
+                    <div class="col-1 text-center">                      
                         <h3><span class="badge bg-secondary" id="alarm-status-variable">-</span></h3>
                     </div>
                     <div class="col">                      
-                        <p>Alarm active?</p>
+                        <h6>Alarm active?</h6>
                     </div>
                 </div>                 
 

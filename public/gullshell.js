@@ -23,7 +23,7 @@ function initialize(){
     getSensitivity();
     //createHeatMap(NUMBER_OF_COLUMNS, getRandomOrEmptyTemperatureArray(true));
 }
-//initialize()
+initialize()
 
 function getRandomArbitrary(min, max) {
     return Math.random() * (max - min) + min;
@@ -202,9 +202,10 @@ function updateVariables(data) {
 async function setAlarmSystemState(status) {      
     // call the function
     if(status === 1){
-        var response = await axios.post(rootUrl + "/api/device/0/function/setAlarsystemOn", { arg: "null" });
+        var response = await axios.post(rootUrl + "/api/device/0/function/setAlarmsystemOn", { arg: "null" });
     } else{
-        var response = await axios.post(rootUrl + "/api/device/0/function/setAlarsystemOff", { arg: "null" });
+        var response = await axios.post(rootUrl + "/api/device/0/function/setAlarmsystemOff", { arg: "null" });
+        getAlarmActiveStatus();
     }
     getAlarmSystemStatus();
     // Handle the response from the server
@@ -283,7 +284,7 @@ async function getTimeout() {
     var timeout = response.data.result;
 
     // update the html element
-    document.getElementById("alarm-timeout").innerHTML = timeout;
+    document.getElementById("alarm-timeout").innerHTML = timeout + " s";
 }
 
 async function getSignificantTemperatureDifference() {
@@ -317,7 +318,7 @@ async function getAlarmSystemStatus() {
     var att = document.createAttribute("checked");
     if(isActiveAlarmSystem){
         document.getElementById("set-alarmsystem-active").setAttributeNode(att);
-    } else{
+    } else {
         document.getElementById("set-alarmsystem-inactive").setAttributeNode(att);
     }     
 }
