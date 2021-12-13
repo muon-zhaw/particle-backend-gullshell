@@ -20,8 +20,7 @@ function initialize(){
     getSignificantTemperatureDifference();
     getAlarmSystemStatus();
     getAlarmActiveStatus();    
-    getSensitivity();
-    //createHeatMap(NUMBER_OF_COLUMNS, getRandomOrEmptyTemperatureArray(true));
+    getSensitivity();    
 }
 initialize()
 
@@ -121,10 +120,7 @@ function updateVariables(data) {
         getAlarmActiveStatus(data);
     }
     
-    //if (data.eventName === "training-stop") {
-    //    document.getElementById("training-status").innerHTML = "Training gestoppt. :-)....*well done!*";
-    //}
-    
+    // Wird in gulls hell noch nicht verwendet
     if (data.eventName === "Lux") {
         // Erhaltenen Wert in der Variable 'lux' speichern
         var lux = Number(data.eventData);
@@ -339,8 +335,7 @@ async function getAlarmActiveStatus(data) {
         
     } else {
         alarmtext.innerHTML = "no alarm"
-        alarmtext.classList.remove("blinking");        
-        //createHeatMap(NUMBER_OF_COLUMNS, getRandomOrEmptyTemperatureArray(true));
+        alarmtext.classList.remove("blinking");                
     }
 
     var firstpart = await axios.get(rootUrl + "/api/device/0/variable/temperatureCharactersString1");        
@@ -362,10 +357,9 @@ function parseTempStringToArray(temperaturesString1, temperaturesString2){
     return temperatures;
 }
 
-
-//////////////////////////////////
-/////   Code für das Chart   /////
-//////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+/////   Code für das Chart  - wird aktuell noch nicht eingesetzt in gulls hell /////
+////////////////////////////////////////////////////////////////////////////////////
 // Array, in dem alle empfangenen Lux-Werte gespeichert werden.
 var allMeasurements = [];
 
