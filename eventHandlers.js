@@ -21,12 +21,7 @@ function handleAlarmsystemActiveChanged(event) {
 
     try {        
         // you can add more properties to your data object
-        data.myMessage = "Hello World";
-
-        // TODO: do something meaningful with the data
-
-        // Log the event in the database
-        //logger.logOne("MyDB", "MyEvent", data);
+        data.myMessage = "Alarmsystem status changend";
 
         // send data to all connected clients
         exports.sendEvent(data);
@@ -44,7 +39,8 @@ function handleAlarmsStatusChanged(event) {
         deviceId: JSON.parse(event.data).coreid,
         timestamp: JSON.parse(event.data).published_at
     };
-
+    // you can add more properties to your data object
+    data.myMessage = "Alarm status changend";
     //var datetime = new Date(data.timestamp); // convert the timestamp to a Date object
 
     try {        
@@ -53,7 +49,7 @@ function handleAlarmsStatusChanged(event) {
         
         //data.temperatures = JSON.stringify(getTemperatureArray(false));    
         //data.temperatures = JSON.stringify(temp);
-        // may held over the array of alarms over time?
+        //may held over the array of alarms over time?
 
         // Log the event in the database
         logger.logOne("MyDB", "AlarmStatusChanged", data);

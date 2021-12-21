@@ -26,3 +26,15 @@
 .heatmap .heatL09{ background: rgb(255, 50 , 50);}
 .heatmap .heatL10{ background: rgb(255, 0 , 0);}
 
+/* 
+(temp < 20) --> heatL01
+(temp < 23) --> heatL02
+(temp < 25) --> heatL03
+(temp < 27) --> heatL04
+(temp < 29) --> heatL05
+(temp < 31) --> heatL06
+(temp < 33) --> heatL07
+(temp < 35) --> heatL08
+(temp < 37) --> heatL09
+(temp > 37) --> heatL10
+*/

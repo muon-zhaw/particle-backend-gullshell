@@ -133,8 +133,7 @@ function updateVariables(data) {
         var level = lux * (100 / maxLevel);
 
         // Farbe des Balkens abhängig von Level festlegen
-        // Liste aller unterstützten Farben: https://www.w3schools.com/cssref/css_colors.asp
-        // -- TODO Aufgabe 2 -- 
+        // Liste aller unterstützten Farben: https://www.w3schools.com/cssref/css_colors.asp        
         // Weitere Farben abhängig vom Level
         if (level < 4) {
             color = "Black";
@@ -189,7 +188,6 @@ function updateVariables(data) {
 
         document.getElementById("average-luxlevel-text").innerHTML = luxAverage + " Lux";
 
-
         // Wert im Chart hinzufügen
         addData(lux);
     }
@@ -232,11 +230,9 @@ async function setSignificantTemperatureDifference() {
     //alert("Response: " + response.data.result); // we could to something meaningful with the return value here ... 
 }
 
-
 async function setSensitivity() {
     // read the value from the input field
     var sensitivity = document.getElementById("sensitivityRange").value;
-
     // call the function
     var response = await axios.post(rootUrl + "/api/device/0/function/setSensitivity", { arg: sensitivity });
 
@@ -259,8 +255,6 @@ async function setFlashLightState(status) {
     } else{
         var response = await axios.post(rootUrl + "/api/device/0/function/setFlashLightOff", { arg: "null" });
     }   
-    // Handle the response from the server
-    //alert("Response: " + response.data.result); // we could to something meaningful with the return value here ... 
 }
 
 async function setSoundState(status) {      
@@ -270,8 +264,6 @@ async function setSoundState(status) {
     } else{
         var response = await axios.post(rootUrl + "/api/device/0/function/setSoundOff", { arg: "null" });
     }
-    // Handle the response from the server
-    //alert("Response: " + response.data.result); // we could to something meaningful with the return value here ... 
 }
 
 async function getTimeout() {
